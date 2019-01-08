@@ -28,7 +28,7 @@
     <application
         android:icon="@mipmap/ic_launcher_settings"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Main"
+        android:theme="@style/SettingsTheme"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
         android:supportsRtl="true">
