@@ -113,8 +113,9 @@ public class KeyHandler implements DeviceKeyHandler {
     private Vibrator mVibrator;
     WakeLock mProximityWakeLock;
     WakeLock mGestureWakeLock;
-    private int mProximityTimeOut;
-    private boolean mProximityWakeSupported;
+    private boolean mPocketModeSupported;
+
+    private int mProximityTimeOut = 100;
 
     public KeyHandler(Context context) {
         mContext = context;
@@ -126,12 +127,10 @@ public class KeyHandler implements DeviceKeyHandler {
                 "GestureWakeLock");
 
         final Resources resources = mContext.getResources();
-        mProximityTimeOut = resources.getInteger(
-                com.android.internal.R.integer.config_proximityCheckTimeout);
-        mProximityWakeSupported = resources.getBoolean(
-                com.android.internal.R.bool.config_proximityCheckOnWake);
+        mPocketModeSupported = resources.getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
 
-        if (mProximityWakeSupported) {
+        if (mPocketModeSupported) {
             mSensorManager = context.getSystemService(SensorManager.class);
             mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             mProximityWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -268,11 +267,11 @@ public class KeyHandler implements DeviceKeyHandler {
             doHapticFeedback();
         } else if (!mEventHandler.hasMessages(GESTURE_REQUEST)) {
             Message msg = getMessageForKeyEvent(scanCode);
-            boolean defaultProximity = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);
-            boolean proximityWakeCheckEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.PROXIMITY_ON_WAKE, defaultProximity ? 1 : 0) == 1;
-            if (mProximityWakeSupported && proximityWakeCheckEnabled && mProximitySensor != null) {
+            boolean isPocketJudgeDefault = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+            boolean isPocketJudgeEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.POCKET_JUDGE, isPocketJudgeDefault ? 1 : 0) == 1;
+            if (mPocketModeSupported && isPocketJudgeEnabled && mProximitySensor != null) {
                 mEventHandler.sendMessageDelayed(msg, mProximityTimeOut);
                 processEvent(scanCode);
             } else {
