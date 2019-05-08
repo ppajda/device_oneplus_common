@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package com.oneplus.settings.device;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -26,8 +26,8 @@ import android.util.Log;
 
 import java.io.File;
 
-import com.cyanogenmod.settings.device.utils.Constants;
-import com.cyanogenmod.settings.device.utils.FileUtils;
+import com.oneplus.settings.device.utils.Constants;
+import com.oneplus.settings.device.utils.FileUtils;
 
 public class Startup extends BroadcastReceiver {
 

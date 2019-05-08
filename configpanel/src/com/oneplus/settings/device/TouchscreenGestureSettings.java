@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package com.oneplus.settings.device;
 
-import com.cyanogenmod.settings.device.utils.NodePreferenceActivity;
+import com.oneplus.settings.device.utils.NodePreferenceActivity;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Device specific gesture package -->
+    <string name="config_customGesturePackage">com.oneplus.settings.device/com.oneplus.settings.device.TouchscreenGestureSettings</string>
+
+</resources>
